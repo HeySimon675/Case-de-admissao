@@ -1,6 +1,6 @@
 package com.conquer.cursos.service;
 
-import com.conquer.cursos.model.entity.Aluno;
+
 import com.conquer.cursos.model.entity.Turma;
 import com.conquer.cursos.repositories.TurmaRepository;
 import com.conquer.cursos.service.exceptions.ObjectNotFoundException;

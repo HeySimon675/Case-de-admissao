@@ -1,6 +1,6 @@
 package com.conquer.cursos.controller;
 
-import com.conquer.cursos.model.entity.Aluno;
+
 import com.conquer.cursos.model.entity.Turma;
 import com.conquer.cursos.service.TurmaService;
 import org.springframework.beans.factory.annotation.Autowired;

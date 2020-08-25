@@ -1,5 +1,6 @@
 package com.conquer.cursos.service;
 
+import com.conquer.cursos.DTO.AlunoNewDTO;
 import com.conquer.cursos.model.entity.Aluno;
 import com.conquer.cursos.repositories.AlunoRepository;
 import com.conquer.cursos.service.exceptions.ObjectNotFoundException;
@@ -23,5 +24,9 @@ public class AlunoService {
         Optional<Aluno> obj = repository.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException(
                 "Objeto não encontrado! Id: " + id + ", Tipo: " + Aluno.class.getName()));
+    }
+
+    public Aluno fromDTO(AlunoNewDTO dto) {
+        return new Aluno(dto.getNome(), dto.getEmail(), dto.getCpf());
     }
 }

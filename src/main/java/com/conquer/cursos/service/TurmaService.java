@@ -1,6 +1,7 @@
 package com.conquer.cursos.service;
 
 
+import com.conquer.cursos.DTO.TurmaDTO;
 import com.conquer.cursos.model.entity.Turma;
 import com.conquer.cursos.repositories.TurmaRepository;
 import com.conquer.cursos.service.exceptions.ObjectNotFoundException;
@@ -24,5 +25,9 @@ public class TurmaService {
         Optional<Turma> obj = repository.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException(
                 "Objeto não encontrado! Id: " + id + ", Tipo: " + Turma.class.getName()));
+    }
+
+    public Turma fromDTO(TurmaDTO dto) {
+        return new Turma(dto.getNome());
     }
 }

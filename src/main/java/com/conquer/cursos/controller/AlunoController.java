@@ -23,4 +23,10 @@ public class AlunoController {
         return ResponseEntity.created(uri).build();
     }
 
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Aluno> find(@PathVariable Integer id){
+        Aluno obj = service.find(id);
+        return ResponseEntity.ok().body(obj);
+    }
+
 }

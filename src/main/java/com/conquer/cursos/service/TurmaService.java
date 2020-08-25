@@ -1,9 +1,13 @@
 package com.conquer.cursos.service;
 
+import com.conquer.cursos.model.entity.Aluno;
 import com.conquer.cursos.model.entity.Turma;
 import com.conquer.cursos.repositories.TurmaRepository;
+import com.conquer.cursos.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class TurmaService {
@@ -14,5 +18,11 @@ public class TurmaService {
         obj.setId(null);
         obj = repository.save(obj);
         return obj;
+    }
+
+    public Turma find(Integer id){
+        Optional<Turma> obj = repository.findById(id);
+        return obj.orElseThrow(() -> new ObjectNotFoundException(
+                "Objeto não encontrado! Id: " + id + ", Tipo: " + Turma.class.getName()));
     }
 }

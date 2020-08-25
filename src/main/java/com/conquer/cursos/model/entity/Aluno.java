@@ -1,4 +1,4 @@
-package com.conquer.cursos.model;
+package com.conquer.cursos.model.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -20,13 +20,14 @@ public class Aluno implements Serializable {
     @ManyToMany(mappedBy = "alunos")
     private Set<Turma> turmasMatriculadas = new HashSet<>();
 
-    public Aluno() {
-    }
 
     public Aluno(String nome, String cpf, String email) {
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
+    }
+
+    public Aluno() {
     }
 
     public Integer getId() {

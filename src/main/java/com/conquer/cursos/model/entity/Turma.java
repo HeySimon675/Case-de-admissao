@@ -1,4 +1,6 @@
-package com.conquer.cursos.model;
+package com.conquer.cursos.model.entity;
+
+import com.conquer.cursos.model.entity.Aluno;
 
 import javax.persistence.*;
 import java.io.Serializable;

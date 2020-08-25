@@ -16,6 +16,9 @@ public class Turma implements Serializable {
     private String nome;
 
     @ManyToMany()
+    @JoinTable(name = "TURMA_ALUNO",
+    joinColumns = @JoinColumn(name = "turma_id"),
+    inverseJoinColumns = @JoinColumn(name = "aluno_id"))
     private Set<Aluno> alunos = new HashSet<>();
 
     public Turma() {

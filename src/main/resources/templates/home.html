@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt_BR" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,13 +23,13 @@
     <img class="hero-image" src="images/landing.svg" alt="Plataforma de Estudos">
 
     <div class="buttons-container">
-        <a class="study" href="study">
+        <a class="study" th:href="@{alunos}">
             <img src="images/icons/study.svg" alt="Estudar">
             Estudar
         </a>
-        <a class="give-classes" href="give-classes">
-            <img src="images/icons/give-classes.svg" alt="Dar aulas">
-            Dar aulas
+        <a class="give-classes" th:href="@{turmas}">
+            <img src="images/icons/give-classes.svg" alt="Ver turmas">
+            Ver turmas
         </a>
     </div>
     <p class="total-conections">

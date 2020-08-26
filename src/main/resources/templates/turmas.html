@@ -23,64 +23,27 @@
         </div>
         <div class="header-content">
             <strong>Essas são as Turmas disponiveis</strong>
-            <form id="search-teachers">
-                <div class="select-block">
-                    <label for="subject">Matéria</label>
-                    <select name="subject" id="subject">
-                        <option value="" disabled="" hidden="">Selecione uma opção</option>
-                        {% for subject in subjects %}
-                        <option value="{{ loop.index }}" {{ "selected" if filter.subject == loop.index }}>
-                        {{ subject }}
-                        </option>
-                        {% endfor %}
+                <a href="">Nova turma</a>
 
-                    </select>
-                </div>
-                <div class="select-block">
-                    <label for="weekday">Dia da semana</label>
-                    <select name="weekday" id="weekday">
-                        <option value="" disabled="" hidden="">Selecione uma opção</option>
-                        {% for w in weekdays %}
-                        <option value="{{ loop.index0 }}" {{ "selected" if filter.weekday == loop.index0 }}>
-                        {{ w }}
-                        </option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="input-block">
-                    <label for="time">Hora</label>
-                    <input name="time" id="time" type="time" value="{{ filter.time }}">
-                </div>
-                <button type="submit">Filtrar</button>
-            </form>
 
         </div>
+
     </header>
     <main>
-        {% for p in proffys%}
-        <article class="teacher-item">
-            <header>
-                <img
-                        src="{{p.avatar}}"
-                        alt="{{p.name}}">
-                <div>
-                    <strong>{{ p.name }}</strong>
-                    <span>{{p.subject}}</span>
-                </div>
-            </header>
-            <p>{{p.bio}}</p>
-            <footer>
-                <p>Preço/hora<strong>{{ p.cost }}</strong>
-                </p>
-                <a href="https://api.whatsapp.com/send?1=pt_BR&phone=55{{p.whatsapp}}&text=Tenho interesse na
-                            sua aula de {{p.subject}} {{p.name}}" class="button" target="_blank">
-                    <img src="/images/icons/whatsapp.svg" alt="Whatsapp">Entrar em contato
-                </a>
-            </footer>
-
-
-        </article>
-        {%endfor%}
+        <div th:each="t: ${turmas}">
+            <article class="teacher-item">
+                <header>
+                    <div>
+                        <strong th:text="${t.nome}"></strong>
+                    </div>
+                </header>
+                <p th:text="descricao"></p>
+                <footer>
+                    <p>Preço<strong th:text="reais"></strong>
+                    </p>
+                </footer>
+            </article>
+        </div>
     </main>
 </div>
 

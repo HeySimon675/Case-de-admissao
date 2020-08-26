@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -56,5 +57,9 @@ public class TurmaService {
             turma.getAlunos().add(aluno);
             repository.save(turma);
         }
+    }
+
+    public List<Turma> getAll() {
+        return repository.findAll();
     }
 }

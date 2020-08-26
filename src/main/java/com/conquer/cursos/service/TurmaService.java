@@ -2,6 +2,7 @@ package com.conquer.cursos.service;
 
 
 import com.conquer.cursos.DTO.TurmaDTO;
+import com.conquer.cursos.model.entity.Aluno;
 import com.conquer.cursos.model.entity.Turma;
 import com.conquer.cursos.repositories.TurmaRepository;
 import com.conquer.cursos.service.exceptions.ObjectNotFoundException;
@@ -29,5 +30,11 @@ public class TurmaService {
 
     public Turma fromDTO(TurmaDTO dto) {
         return new Turma(dto.getNome());
+    }
+
+    public Turma update(Turma obj){
+        Turma aux = find(obj.getId());
+        aux.setNome(obj.getNome());
+        return repository.save(aux);
     }
 }

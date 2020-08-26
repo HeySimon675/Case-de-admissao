@@ -1,7 +1,9 @@
 package com.conquer.cursos.controller;
 
 
+import com.conquer.cursos.DTO.AlunoDTO;
 import com.conquer.cursos.DTO.TurmaDTO;
+import com.conquer.cursos.model.entity.Aluno;
 import com.conquer.cursos.model.entity.Turma;
 import com.conquer.cursos.service.TurmaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,5 +33,13 @@ public class TurmaController {
     public ResponseEntity<Turma> find(@PathVariable Integer id){
         Turma obj = service.find(id);
         return ResponseEntity.ok().body(obj);
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Void> update(@Valid @RequestBody TurmaDTO dto, @PathVariable Integer id){
+        Turma obj = service.fromDTO(dto);
+        obj.setId(id);
+        service.update(obj);
+        return ResponseEntity.noContent().build();
     }
 }

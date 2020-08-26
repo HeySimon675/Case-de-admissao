@@ -16,6 +16,7 @@ import java.net.URI;
 @RequestMapping("/alunos")
 public class AlunoController {
 
+
     @Autowired
     private AlunoService service;
 

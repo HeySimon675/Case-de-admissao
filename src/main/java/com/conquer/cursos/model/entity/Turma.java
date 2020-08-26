@@ -1,6 +1,7 @@
 package com.conquer.cursos.model.entity;
 
 import com.conquer.cursos.model.entity.Aluno;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,13 +12,17 @@ import java.util.Set;
 public class Turma implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @Transient
+    public static final int LIMITE_ALUNOS = 5;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String nome;
 
-    @ManyToMany()
+    @JsonManagedReference
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "TURMA_ALUNO",
     joinColumns = @JoinColumn(name = "turma_id"),
     inverseJoinColumns = @JoinColumn(name = "aluno_id"))
@@ -46,4 +51,11 @@ public class Turma implements Serializable {
         this.nome = nome;
     }
 
+    public Set<Aluno> getAlunos() {
+        return alunos;
+    }
+
+    public boolean isCheia(){
+        return (alunos.size() >= LIMITE_ALUNOS);
+    }
 }

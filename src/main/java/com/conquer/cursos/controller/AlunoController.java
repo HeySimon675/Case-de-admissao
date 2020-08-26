@@ -47,4 +47,10 @@ public class AlunoController {
         return ResponseEntity.noContent().build();
     }
 
+    @PostMapping("/matricular/{turma}/{aluno}")
+    public ResponseEntity<Void> matricular(@PathVariable Integer turma, @PathVariable Integer aluno){
+        service.matricular(turma, aluno);
+        return ResponseEntity.noContent().build();
+    }
+
 }

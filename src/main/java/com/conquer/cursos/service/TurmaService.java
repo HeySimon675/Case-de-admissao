@@ -2,6 +2,7 @@ package com.conquer.cursos.service;
 
 
 import com.conquer.cursos.DTO.TurmaDTO;
+import com.conquer.cursos.model.entity.Aluno;
 import com.conquer.cursos.model.entity.Turma;
 import com.conquer.cursos.repositories.TurmaRepository;
 import com.conquer.cursos.service.exceptions.DataIntegrityException;
@@ -47,5 +48,14 @@ public class TurmaService {
         catch (DataIntegrityViolationException e) {
             throw new DataIntegrityException("Não é possível excluir porque há Alunos matriculados");
         }
+    }
+
+    public void matricularAluno(Integer turmaId, Aluno aluno){
+        Turma turma = find(turmaId);
+        if(!turma.isCheia()){
+            turma.getAlunos().add(aluno);
+            repository.save(turma);
+        }
+        // turma cheia exception
     }
 }

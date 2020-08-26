@@ -1,5 +1,8 @@
 package com.conquer.cursos.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -17,7 +20,8 @@ public class Aluno implements Serializable {
     private String cpf;
     private String email;
 
-    @ManyToMany(mappedBy = "alunos")
+    @JsonBackReference
+    @ManyToMany(mappedBy = "alunos",fetch = FetchType.LAZY)
     private Set<Turma> turmasMatriculadas = new HashSet<>();
 
 
@@ -60,5 +64,9 @@ public class Aluno implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Set<Turma> getTurmasMatriculadas() {
+        return turmasMatriculadas;
     }
 }

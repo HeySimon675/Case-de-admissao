@@ -3,7 +3,9 @@ package com.conquer.cursos.service;
 import com.conquer.cursos.DTO.AlunoDTO;
 import com.conquer.cursos.DTO.AlunoNewDTO;
 import com.conquer.cursos.model.entity.Aluno;
+import com.conquer.cursos.model.entity.Turma;
 import com.conquer.cursos.repositories.AlunoRepository;
+import com.conquer.cursos.repositories.TurmaRepository;
 import com.conquer.cursos.service.exceptions.DataIntegrityException;
 import com.conquer.cursos.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,9 @@ import java.util.Optional;
 public class AlunoService {
     @Autowired
     private AlunoRepository repository;
+
+    @Autowired
+    private TurmaService turmaService;
 
     public Aluno insert(Aluno obj){
         obj.setId(null);
@@ -52,5 +57,9 @@ public class AlunoService {
         catch (DataIntegrityViolationException e) {
             throw new DataIntegrityException("Não é possível excluir por estar matriculado em Turmas");
         }
+    }
+
+    public void matricular(Integer turmaId, Integer alunoId){
+        turmaService.matricularAluno(turmaId, find(alunoId));
     }
 }

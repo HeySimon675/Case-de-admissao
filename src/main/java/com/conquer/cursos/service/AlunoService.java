@@ -4,8 +4,10 @@ import com.conquer.cursos.DTO.AlunoDTO;
 import com.conquer.cursos.DTO.AlunoNewDTO;
 import com.conquer.cursos.model.entity.Aluno;
 import com.conquer.cursos.repositories.AlunoRepository;
+import com.conquer.cursos.service.exceptions.DataIntegrityException;
 import com.conquer.cursos.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -40,5 +42,15 @@ public class AlunoService {
         aux.setNome(obj.getNome());
         aux.setEmail(obj.getEmail());
         return repository.save(aux);
+    }
+
+    public void delete(Integer id) {
+        find(id);
+        try {
+            repository.deleteById(id);
+        }
+        catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityException("Não é possível excluir por estar matriculado em Turmas");
+        }
     }
 }

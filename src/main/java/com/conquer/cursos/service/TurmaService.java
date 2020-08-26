@@ -2,11 +2,12 @@ package com.conquer.cursos.service;
 
 
 import com.conquer.cursos.DTO.TurmaDTO;
-import com.conquer.cursos.model.entity.Aluno;
 import com.conquer.cursos.model.entity.Turma;
 import com.conquer.cursos.repositories.TurmaRepository;
+import com.conquer.cursos.service.exceptions.DataIntegrityException;
 import com.conquer.cursos.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -36,5 +37,15 @@ public class TurmaService {
         Turma aux = find(obj.getId());
         aux.setNome(obj.getNome());
         return repository.save(aux);
+    }
+
+    public void delete(Integer id) {
+        find(id);
+        try {
+            repository.deleteById(id);
+        }
+        catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityException("Não é possível excluir porque há Alunos matriculados");
+        }
     }
 }

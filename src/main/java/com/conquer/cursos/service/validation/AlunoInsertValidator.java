@@ -4,7 +4,6 @@ import com.conquer.cursos.DTO.AlunoNewDTO;
 import com.conquer.cursos.controller.exceptions.FieldMessage;
 import com.conquer.cursos.model.entity.Aluno;
 import com.conquer.cursos.repositories.AlunoRepository;
-import com.conquer.cursos.service.validation.utils.BR;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.ConstraintValidator;
@@ -25,9 +24,6 @@ public class AlunoInsertValidator implements ConstraintValidator<AlunoInsert, Al
 
       List<FieldMessage> list = new ArrayList<>();
 
-//      if ( !BR.isValidCPF(objDTO.getCpf())) {
-//         list.add(new FieldMessage("cpf", "CPF inválido"));
-//      }
 
       Aluno aux = repository.findByEmail(objDTO.getEmail());
       if (aux != null) {

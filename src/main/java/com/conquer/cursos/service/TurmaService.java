@@ -52,10 +52,9 @@ public class TurmaService {
 
     public void matricularAluno(Integer turmaId, Aluno aluno){
         Turma turma = find(turmaId);
-        if(!turma.isCheia()){
+        if(!(turma.isCheia() && turma.getAlunos().contains(aluno))) {
             turma.getAlunos().add(aluno);
             repository.save(turma);
         }
-        // turma cheia exception
     }
 }

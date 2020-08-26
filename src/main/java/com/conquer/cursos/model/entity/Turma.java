@@ -55,6 +55,7 @@ public class Turma implements Serializable {
         return alunos;
     }
 
+    @Transient
     public boolean isCheia(){
         return (alunos.size() >= LIMITE_ALUNOS);
     }

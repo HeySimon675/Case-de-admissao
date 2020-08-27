@@ -9,7 +9,6 @@
 
 #search-teachers label {
     color: var(--color-text-in-primary);
-
 }
 
 #search-teachers .select-block {
@@ -41,7 +40,7 @@
 }
 
 .teacher-item header div {
-    margin-left: 2.4rem;
+    /*margin-left: 2.4rem;*/
 }
 
 .teacher-item header div strong {
@@ -70,7 +69,6 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-
 }
 
 .teacher-item footer p {

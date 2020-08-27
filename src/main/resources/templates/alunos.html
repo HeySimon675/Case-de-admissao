@@ -22,25 +22,25 @@
             <img src="images/logo.svg" alt="logo">
         </div>
         <div class="header-content">
-            <strong>Essas são as Turmas disponiveis</strong>
-                <a href="">Nova turma</a>
-
-
+            <strong>Alunos Cadastrados</strong>
+            <a href="">Novo Aluno</a>
         </div>
-
     </header>
     <main>
-        <div th:each="t: ${turmas}">
+        <div th:each="a: ${alunos}">
             <article class="teacher-item">
                 <header>
                     <div>
-                        <strong th:text="${t.nome}"></strong>
+                        <strong th:text="${a.nome}"></strong>
                     </div>
                 </header>
-                <p th:text="descricao"></p>
+                <p>Informações:<br>
+                    Email: <span th:text="${a.email}"></span><br>
+                    CPF: <span th:text="${a.cpf}"></span><br>
+                </p>
+
                 <footer>
-                    <p>Preço<strong th:text="reais"></strong>
-                    </p>
+
                 </footer>
             </article>
         </div>

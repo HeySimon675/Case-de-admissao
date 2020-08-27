@@ -24,8 +24,10 @@
             <strong>Alunos Cadastrados</strong>
             <a th:href="@{alunos/novoAluno}">Novo Aluno</a>
         </div>
+
     </header>
     <main>
+        <strong th:text="${warning}"></strong>
         <div th:each="a: ${alunos}">
             <article class="teacher-item">
                 <header>
@@ -39,11 +41,14 @@
                 </p>
 
                 <footer>
-                    <form th:action="@{/turmas/matricula}" th:object="${dto}">
+                    <form id="matricular" th:action="@{/turmas/matricula}" th:object="${dto}">
                         <input type="text" th:value="${a.id}" id="id" name="id" hidden>
                         <button type="submit">Matricular-se</button>
                     </form>
-
+                    <form id="delete" th:action="@{/alunos/deletar}" th:object="${dto}" method="post">
+                        <input type="number" th:value="${a.id}" id="id" name="id" hidden>
+                        <button type="submit">Apagar Cadastro</button>
+                    </form>
                 </footer>
             </article>
         </div>

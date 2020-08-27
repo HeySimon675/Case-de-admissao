@@ -7,6 +7,7 @@ import com.conquer.cursos.model.entity.Aluno;
 import com.conquer.cursos.model.entity.Turma;
 import com.conquer.cursos.service.AlunoService;
 import com.conquer.cursos.service.TurmaService;
+import com.conquer.cursos.service.exceptions.DataIntegrityException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -48,6 +49,18 @@ public class AlunoController {
         aluno = service.insert(aluno);
         return "redirect:/alunos";
     }
+
+    @PostMapping("/deletar")
+    public String deleteAluno(@ModelAttribute DTO dto, RedirectAttributes redirectAttributes){
+        //inserir verificação de matriculas, e retornar warning
+        try{
+            service.delete(dto.getId());
+        }catch (DataIntegrityException e){
+            redirectAttributes.addFlashAttribute("warning", e.getMessage());
+        }
+        return "redirect:/alunos";
+    }
+
 //    @PostMapping
 //    public String insertAluno(@Valid @ModelAttribute AlunoNewDTO dto, RedirectAttributes redirectAttributes){
 //        Aluno aluno = service.fromDTO(dto);

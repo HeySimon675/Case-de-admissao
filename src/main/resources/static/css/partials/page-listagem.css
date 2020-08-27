@@ -101,11 +101,20 @@
     text-decoration: none;
 
     transition: background .2s;
-    margin-left: 1.6rem;
+    /*margin-left: 1.6rem;*/
 }
 
 .teacher-item footer button:hover{
     background: var(--color-secondary-dark);
+}
+
+.teacher-item footer #delete button{
+    background: var(--color-primary);
+}
+
+
+.teacher-item footer #delete button:hover{
+    background: var(--color-primary-dark);
 }
 
 @media(min-width: 700px)

@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html lang="pt_BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="theme-color" content="#8257E5">
+    <title>Proffy | Sua plataforma de estudos online</title>
+    <link rel="shortcut icon" href="../images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/partials/header.css">
+    <link rel="stylesheet" href="../css/partials/forms.css">
+    <link rel="stylesheet" href="../css/partials/page-alunos.css">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&amp;family=Poppins:wght@400;600&amp;display=swap" rel="stylesheet">
+
+</head>
+
+<body id="page-give-classes">
+
+<div id="container">
+    <header class="page-header">
+        <div class="top-bar-container">
+            <a href="/alunos">
+                <img src="../images/icons/back.svg" alt="voltar"></a>
+            <img src="../images/logo.svg" alt="logo">
+        </div>
+        <div class="header-content">
+            <strong>Que incrivel que você quer participar das nossas turmas!</strong>
+            <p>O primeiro passo, é prencher o formulario de inscrição</p>
+        </div>
+    </header>
+    <main>
+        <form action="#" th:action="@{/alunos}" th:object="${aluno}" method="post" id="create-class">
+            <fieldset>
+                <legend>Seus Dados </legend>
+                <div class="input-block">
+                    <label for="name">Nome completo</label>
+                    <input th:field="*{nome}" id="name" required>
+                </div>
+                <div class="input-block">
+                    <label for="cpf">CPF</label>
+                    <input th:field="*{cpf}" id="cpf" required>
+                </div>
+                <div class="input-block">
+                    <label for="email">Email</label>
+                    <input th:field="*{email}" id="email" required>
+                </div>
+            </fieldset>
+        </form>
+        <footer>
+            <p>
+                <img src="../images/icons/warning.svg" alt="Aviso importante">
+                Importante! <br> Preencha todos os dados
+            </p>
+            <button type="submit" form="create-class">Salvar cadastro</button>
+        </footer>
+    </main>
+</div>
+
+</body>
+</html>

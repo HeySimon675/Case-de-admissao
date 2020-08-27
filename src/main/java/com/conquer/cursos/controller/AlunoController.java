@@ -40,12 +40,18 @@ public class AlunoController {
     }
 
     @PostMapping
-    public String insertAluno(@Valid @ModelAttribute AlunoNewDTO dto, RedirectAttributes redirectAttributes){
+    public String insertAluno(@Valid @ModelAttribute AlunoNewDTO dto){
         Aluno aluno = service.fromDTO(dto);
         aluno = service.insert(aluno);
-        redirectAttributes.addFlashAttribute("aluno", aluno);
-        return "redirect:/matricular";
+        return "redirect:/alunos";
     }
+//    @PostMapping
+//    public String insertAluno(@Valid @ModelAttribute AlunoNewDTO dto, RedirectAttributes redirectAttributes){
+//        Aluno aluno = service.fromDTO(dto);
+//        aluno = service.insert(aluno);
+//        redirectAttributes.addFlashAttribute("aluno", aluno);
+//        return "redirect:/matricular";
+//    }
 
 //
 //    @PostMapping

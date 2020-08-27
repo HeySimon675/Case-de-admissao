@@ -2,6 +2,7 @@ package com.conquer.cursos.controller;
 
 import com.conquer.cursos.DTO.AlunoDTO;
 import com.conquer.cursos.DTO.AlunoNewDTO;
+import com.conquer.cursos.DTO.DTO;
 import com.conquer.cursos.model.entity.Aluno;
 import com.conquer.cursos.model.entity.Turma;
 import com.conquer.cursos.service.AlunoService;
@@ -31,8 +32,10 @@ public class AlunoController {
     @GetMapping
     public String listarAlunos(Model model){
         model.addAttribute("alunos", service.getAll());
+        model.addAttribute("dto", new DTO());
         return "alunos";
     }
+
     @GetMapping("/novoAluno")
     public String novoAluno(Model model) {
         model.addAttribute("aluno", new AlunoNewDTO());

@@ -8,8 +8,9 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/partials/header.css">
     <link rel="stylesheet" href="css/partials/forms.css">
-    <link rel="stylesheet" href="css/partials/page-listagem.css">
+    <link rel="stylesheet" href="../static/css/partials/page-listagem.css">
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&amp;family=Poppins:wght@400;600&amp;display=swap" rel="stylesheet">
+
 </head>
 <body id="page-study">
 
@@ -21,32 +22,29 @@
             <img src="images/logo.svg" alt="logo">
         </div>
         <div class="header-content">
-            <strong>Alunos Cadastrados</strong>
-            <a th:href="@{alunos/novoAluno}">Novo Aluno</a>
+            <strong>Essas são as Turmas disponiveis</strong>
         </div>
     </header>
     <main>
-        <div th:each="a: ${alunos}">
+
+        <div th:each="t: ${turmas}">
+            <form th:id="${t.id}" th:action="@{/matricular}" th:object="${matriculaDTO}" method="post">
             <article class="teacher-item">
                 <header>
                     <div>
-                        <strong th:text="${a.nome}"></strong>
+                        <strong th:text="${t.nome}"></strong>
                     </div>
                 </header>
-                <p>Informações:<br>
-                    Email: <span th:text="${a.email}"></span><br>
-                    CPF: <span th:text="${a.cpf}"></span><br>
-                </p>
-
+                <p th:text="${aluno.id}"></p>
                 <footer>
-                    <form th:action="@{/turmas/matricula}" th:object="${dto}">
-                        <input type="text" th:value="${a.id}" id="id" name="id" hidden>
-                        <button type="submit">Matricular-se</button>
-                    </form>
-
+                    <p>Preço<strong th:text="reais"></strong>
+                    </p>
+                    <button class="button" type="submit" th:form="${t.id}"> Matricule-se</button>
                 </footer>
             </article>
+            </form>
         </div>
+
     </main>
 </div>
 

@@ -1,20 +1,18 @@
 package com.conquer.cursos.controller;
 
 
-import com.conquer.cursos.DTO.AlunoNewDTO;
+import com.conquer.cursos.DTO.DTO;
 import com.conquer.cursos.DTO.TurmaDTO;
 import com.conquer.cursos.model.entity.Aluno;
 import com.conquer.cursos.model.entity.Turma;
+import com.conquer.cursos.service.AlunoService;
 import com.conquer.cursos.service.TurmaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
-import java.net.URI;
 import java.util.List;
 
 @Controller
@@ -23,6 +21,9 @@ public class TurmaController {
 
     @Autowired
     private TurmaService service;
+
+    @Autowired
+    private AlunoService alunoService;
 
     @GetMapping
     public String pageTurmas(Model model){
@@ -44,19 +45,20 @@ public class TurmaController {
         return "redirect:/turmas";
     }
 
-    @GetMapping("/matricular")
-    public String mostrarTurmasParaMatricula(@ModelAttribute Aluno aluno, Model model){
+    @GetMapping("/matricula")
+    public String mostrarTurmasParaMatricula(@ModelAttribute DTO dto, Model model){
+        Aluno aluno = alunoService.find(dto.getId());
         List<Turma> turmas = service.getAllDisponivel(aluno);
         model.addAttribute("turmas", turmas);
         model.addAttribute("aluno", aluno);
-        return "matricular";
+        return "matricula";
     }
 
-    @PostMapping("/matricular")
-    public String matricularAluno(@ModelAttribute Aluno aluno, @ModelAttribute Turma turma){
-        service.matricularAluno(turma.getId(),aluno);
-        return "home";
-    }
+//    @PostMapping("/matricular")
+//    public String matricularAluno(@ModelAttribute Aluno aluno, @ModelAttribute Turma turma){
+//        service.matricularAluno(turma.getId(),aluno);
+//        return "home";
+//    }
 
     /* METODOS DA API
     @PostMapping

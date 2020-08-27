@@ -8,14 +8,11 @@ import com.conquer.cursos.repositories.TurmaRepository;
 import com.conquer.cursos.service.exceptions.DataIntegrityException;
 import com.conquer.cursos.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,12 +33,14 @@ public class TurmaService {
     }
 
     public Turma fromDTO(TurmaDTO dto) {
-        return new Turma(dto.getNome());
+        return new Turma(dto.getNome(), dto.getDescricao());
     }
+
 
     public Turma update(Turma obj){
         Turma aux = find(obj.getId());
         aux.setNome(obj.getNome());
+        aux.setDescricao(obj.getDescricao());
         return repository.save(aux);
     }
 

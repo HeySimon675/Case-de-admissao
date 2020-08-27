@@ -25,7 +25,7 @@
                     </div>
                 </header>
                 <div class="informacoes">
-                    <p>Informações:<br></p>
+                    <p>Informações:<br><span th:text="${t.descricao}"></span></p>
                 </div>
                 <footer>
                     <form id="delete" th:action="@{/alunos/cancelar}" th:object="${dto}" method="post">

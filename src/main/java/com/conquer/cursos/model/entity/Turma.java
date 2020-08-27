@@ -21,6 +21,8 @@ public class Turma implements Serializable {
 
     private String nome;
 
+    private String descricao;
+
     @JsonManagedReference
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "TURMA_ALUNO",
@@ -31,8 +33,17 @@ public class Turma implements Serializable {
     public Turma() {
     }
 
-    public Turma(String nome) {
+    public Turma(String nome, String descricao) {
         this.nome = nome;
+        this.descricao = descricao;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public Integer getId() {

@@ -3,6 +3,7 @@ package com.conquer.cursos.controller;
 import com.conquer.cursos.DTO.AlunoDTO;
 import com.conquer.cursos.DTO.AlunoNewDTO;
 import com.conquer.cursos.DTO.DTO;
+import com.conquer.cursos.DTO.MatriculaDTO;
 import com.conquer.cursos.model.entity.Aluno;
 import com.conquer.cursos.model.entity.Turma;
 import com.conquer.cursos.service.AlunoService;
@@ -50,11 +51,29 @@ public class AlunoController {
         return "redirect:/alunos";
     }
 
+    @GetMapping("/turmas")
+    public String turmasMatriculadas(@ModelAttribute DTO dto, Model model){
+        model.addAttribute("aluno",service.find(dto.getId()));
+        model.addAttribute("turmas",service.getAllMatriculadas(dto.getId()));
+        return "turmasMatriculadas";
+    }
+
     @PostMapping("/deletar")
     public String deleteAluno(@ModelAttribute DTO dto, RedirectAttributes redirectAttributes){
         //inserir verificação de matriculas, e retornar warning
         try{
             service.delete(dto.getId());
+        }catch (DataIntegrityException e){
+            redirectAttributes.addFlashAttribute("warning", e.getMessage());
+        }
+        return "redirect:/alunos";
+    }
+
+    @PostMapping("/cancelar")
+    public String cancelarMatricula(@ModelAttribute MatriculaDTO dto, RedirectAttributes redirectAttributes){
+        try{
+            service.cancelarMatricula(dto);
+            redirectAttributes.addFlashAttribute("warning", "Matricula cancelada com Sucesso");
         }catch (DataIntegrityException e){
             redirectAttributes.addFlashAttribute("warning", e.getMessage());
         }

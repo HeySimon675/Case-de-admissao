@@ -2,6 +2,7 @@ package com.conquer.cursos.service;
 
 import com.conquer.cursos.DTO.AlunoDTO;
 import com.conquer.cursos.DTO.AlunoNewDTO;
+import com.conquer.cursos.DTO.MatriculaDTO;
 import com.conquer.cursos.model.entity.Aluno;
 import com.conquer.cursos.model.entity.Turma;
 import com.conquer.cursos.repositories.AlunoRepository;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class AlunoService {
@@ -66,5 +68,21 @@ public class AlunoService {
 
     public List<Aluno> getAll() {
         return repository.findAll();
+    }
+
+    public Set<Turma> getAllMatriculadas(Integer id) {
+        return find(id).getTurmasMatriculadas();
+    }
+
+    public void cancelarMatricula(MatriculaDTO dto) {
+        Turma turma = turmaService.find(dto.getTurmaId());
+        Aluno aluno = find(dto.getAlunoId());
+        try{
+            aluno.getTurmasMatriculadas().remove(turma);
+            turma.getAlunos().remove(aluno);
+            repository.save(aluno);
+        }catch (Exception e){
+            throw new DataIntegrityException("Não foi possível cancelar a matricula");
+        }
     }
 }

@@ -55,7 +55,13 @@
     margin-top: 0.4rem;
 }
 
-.teacher-item > p {
+.teacher-item .informacoes button{
+    padding: 0.2rem;
+    margin-left: 1.6rem;
+}
+
+
+.teacher-item .informacoes > p {
     padding: 0 2rem;
     font-size: 1.6rem;
     line-height: 2.8rem;
@@ -145,10 +151,14 @@
         margin-bottom: 0;
     }
 
-    .teacher-item > p{
+    .teacher-item .informacoes > p{
         padding: 0 32px;
     }
 
+    .teacher-item .informacoes button{
+        margin-left: 3rem;
+        padding: 0 32px;
+    }
     .teacher-item footer p strong{
         display: initial;
         margin-left: 16px;

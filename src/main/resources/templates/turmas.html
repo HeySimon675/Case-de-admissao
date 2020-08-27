@@ -35,7 +35,9 @@
                         <strong th:text="${t.nome}"></strong>
                     </div>
                 </header>
-                <p th:text="descricao"></p>
+                <div class="informacoes">
+                    <p th:text="descricao"></p>
+                </div>
                 <footer>
                     <p>Preço<strong th:text="reais"></strong></p>
                     <form id="alunos" th:action="@{/turmas/matriculados}" th:object="${dto}">

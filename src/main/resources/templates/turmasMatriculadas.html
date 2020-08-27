@@ -4,13 +4,12 @@
     <meta charset="UTF-8">
     <meta name="theme-color" content="#8257E5">
     <title>Proffy | Sua plataforma de estudos online</title>
-    <link rel="shortcut icon" href="../images/favicon.png" type="image/png">
+    <link rel="shortcut icon" href="images/favicon.png" type="image/png">
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/partials/header.css">
     <link rel="stylesheet" href="../css/partials/forms.css">
     <link rel="stylesheet" href="../css/partials/page-listagem.css">
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&amp;family=Poppins:wght@400;600&amp;display=swap" rel="stylesheet">
-
 </head>
 <body id="page-study">
 
@@ -22,13 +21,13 @@
             <img src="../images/logo.svg" alt="logo">
         </div>
         <div class="header-content">
-            <strong>Essas são as Turmas disponiveis para você <span th:text="${aluno.nome}"></span>.</strong>
+            <strong> <span th:text="${aluno.nome}"></span>, essas são suas turmas!</strong>
         </div>
+
     </header>
     <main>
-
+        <strong th:text="${warning}"></strong>
         <div th:each="t: ${turmas}">
-
             <article class="teacher-item">
                 <header>
                     <div>
@@ -36,20 +35,17 @@
                     </div>
                 </header>
                 <div class="informacoes">
-                    <p th:text="${aluno.id}"></p>
+                    <p>Informações:<br></p>
                 </div>
                 <footer>
-                    <p>Preço<strong th:text="reais"></strong></p>
-                    <form th:id="${t.id}" th:action="@{matricula}" th:object="${matriculaDTO}" method="post">
-                        <input type="hidden" th:value="${t.id}" id="turmaId" name="turmaId">
-                        <input type="hidden" th:value="${aluno.id}" id="alunoId" name="alunoId">
-                        <button class="button" th:form="${t.id}" type="submit"> Matricule-se</button>
+                    <form id="delete" th:action="@{/alunos/cancelar}" th:object="${dto}" method="post">
+                        <input type="number" th:value="${t.id}" id="turmaId" name="turmaId" hidden>
+                        <input type="number" th:value="${aluno.id}" id="alunoId" name="alunoId" hidden>
+                        <button type="submit">Cancelar matricula</button>
                     </form>
                 </footer>
             </article>
-
         </div>
-
     </main>
 </div>
 

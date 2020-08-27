@@ -35,10 +35,17 @@
                         <strong th:text="${a.nome}"></strong>
                     </div>
                 </header>
-                <p>Informações:<br>
-                    Email: <span th:text="${a.email}"></span><br>
-                    CPF: <span th:text="${a.cpf}"></span><br>
-                </p>
+                <div class="informacoes">
+                    <p>Informações:<br>
+                        Email: <span th:text="${a.email}"></span><br>
+                        CPF: <span th:text="${a.cpf}"></span><br>
+                    </p>
+                    <form id="turmasMatriculadas" th:action="@{/alunos/turmas}" th:object="${dto}">
+                        <input type="text" th:value="${a.id}" id="id" name="id" hidden>
+                        <button type="submit">Ver turmas</button>
+                    </form>
+
+                </div>
 
                 <footer>
                     <form id="matricular" th:action="@{/turmas/matricula}" th:object="${dto}">

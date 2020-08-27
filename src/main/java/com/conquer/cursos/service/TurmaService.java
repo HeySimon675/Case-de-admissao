@@ -11,8 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 @Service
 public class TurmaService {
@@ -61,5 +64,14 @@ public class TurmaService {
 
     public List<Turma> getAll() {
         return repository.findAll();
+    }
+
+    public List<Turma> getAllDisponivel(Aluno aluno) {
+        List<Turma> disponiveis = getAll().stream().filter(turma -> !turma.isCheia()).filter(turma -> !turma.findAluno(aluno)).collect(Collectors.toList());
+        return disponiveis;
+    }
+
+    public boolean isMatriculado(Integer alunoId){
+       return false;
     }
 }

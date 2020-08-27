@@ -1,7 +1,9 @@
 package com.conquer.cursos.controller;
 
 
+import com.conquer.cursos.DTO.AlunoNewDTO;
 import com.conquer.cursos.DTO.TurmaDTO;
+import com.conquer.cursos.model.entity.Aluno;
 import com.conquer.cursos.model.entity.Turma;
 import com.conquer.cursos.service.TurmaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
 
 @Controller
 @RequestMapping("/turmas")
@@ -27,6 +30,35 @@ public class TurmaController {
         return "turmas";
     }
 
+    @GetMapping("/novaTurma")
+    public String novaTurma(Model model){
+        model.addAttribute("turma", new TurmaDTO());
+        return "novaTurma";
+    }
+
+
+    @PostMapping
+    public String insertTurma(@Valid @ModelAttribute TurmaDTO dto){
+        Turma turma = service.fromDTO(dto);
+        service.insert(turma);
+        return "redirect:/turmas";
+    }
+
+    @GetMapping("/matricular")
+    public String mostrarTurmasParaMatricula(@ModelAttribute Aluno aluno, Model model){
+        List<Turma> turmas = service.getAllDisponivel(aluno);
+        model.addAttribute("turmas", turmas);
+        model.addAttribute("aluno", aluno);
+        return "matricular";
+    }
+
+    @PostMapping("/matricular")
+    public String matricularAluno(@ModelAttribute Aluno aluno, @ModelAttribute Turma turma){
+        service.matricularAluno(turma.getId(),aluno);
+        return "home";
+    }
+
+    /* METODOS DA API
     @PostMapping
     public ResponseEntity<Void> insert(@Valid @RequestBody TurmaDTO dto){
         Turma obj = service.fromDTO(dto);
@@ -54,4 +86,5 @@ public class TurmaController {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
+    */
 }

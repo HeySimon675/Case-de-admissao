@@ -45,13 +45,11 @@ public class TurmaService {
     }
 
     public void delete(Integer id) {
-        find(id);
-        try {
-            repository.deleteById(id);
-        }
-        catch (DataIntegrityViolationException e) {
+        Turma turma = find(id);
+        if(!turma.getAlunos().isEmpty()){
             throw new DataIntegrityException("Não é possível excluir porque há Alunos matriculados");
-        }
+        }else
+            repository.deleteById(id);
     }
 
     public void matricularAluno(Integer turmaId, Aluno aluno){

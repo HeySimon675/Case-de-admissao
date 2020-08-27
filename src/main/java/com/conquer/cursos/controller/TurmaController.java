@@ -8,10 +8,12 @@ import com.conquer.cursos.model.entity.Aluno;
 import com.conquer.cursos.model.entity.Turma;
 import com.conquer.cursos.service.AlunoService;
 import com.conquer.cursos.service.TurmaService;
+import com.conquer.cursos.service.exceptions.DataIntegrityException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -60,6 +62,17 @@ public class TurmaController {
     public String novaTurma(Model model){
         model.addAttribute("turma", new TurmaDTO());
         return "novaTurma";
+    }
+
+    @PostMapping("/deletar")
+    public String deleteAluno(@ModelAttribute DTO dto, RedirectAttributes redirectAttributes){
+        //inserir verificação de matriculas, e retornar warning
+        try{
+            service.delete(dto.getId());
+        }catch (DataIntegrityException e){
+            redirectAttributes.addFlashAttribute("warning", e.getMessage());
+        }
+        return "redirect:/turmas";
     }
 
     /* METODOS DA API

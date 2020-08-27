@@ -24,12 +24,10 @@
         <div class="header-content">
             <strong>Essas são as Turmas disponiveis</strong>
                 <a th:href="@{turmas/novaTurma}">Nova turma</a>
-
-
         </div>
-
     </header>
     <main>
+        <strong id="warning" th:text="${warning}"></strong>
         <div th:each="t: ${turmas}">
             <article class="teacher-item">
                 <header>
@@ -39,8 +37,11 @@
                 </header>
                 <p th:text="descricao"></p>
                 <footer>
-                    <p>Preço<strong th:text="reais"></strong>
-                    </p>
+                    <p>Preço<strong th:text="reais"></strong></p>
+                    <form id="delete" th:action="@{/turmas/deletar}" th:object="${dto}" method="post">
+                        <input type="number" th:value="${t.id}" id="id" name="id" hidden>
+                        <button type="submit">Cancelar turma</button>
+                    </form>
                 </footer>
             </article>
         </div>

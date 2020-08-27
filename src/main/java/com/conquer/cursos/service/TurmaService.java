@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -58,6 +59,10 @@ public class TurmaService {
             turma.getAlunos().add(aluno);
             repository.save(turma);
         }
+    }
+
+    public Set<Aluno> getMatriculados(Integer id){
+        return find(id).getAlunos();
     }
 
     public List<Turma> getAll() {

@@ -64,6 +64,13 @@ public class TurmaController {
         return "novaTurma";
     }
 
+    @GetMapping("/matriculados")
+    public String verMatriculados(@ModelAttribute DTO dto, Model model){
+        model.addAttribute("alunos", service.getMatriculados(dto.getId()));
+        model.addAttribute("turma", service.find(dto.getId()));
+        return "alunosMatriculados";
+    }
+
     @PostMapping("/deletar")
     public String deleteAluno(@ModelAttribute DTO dto, RedirectAttributes redirectAttributes){
         //inserir verificação de matriculas, e retornar warning

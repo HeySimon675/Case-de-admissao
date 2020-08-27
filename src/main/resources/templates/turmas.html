@@ -38,6 +38,10 @@
                 <p th:text="descricao"></p>
                 <footer>
                     <p>Preço<strong th:text="reais"></strong></p>
+                    <form id="alunos" th:action="@{/turmas/matriculados}" th:object="${dto}">
+                        <input type="text" th:value="${t.id}" id="id" name="id" hidden>
+                        <button type="submit">Ver alunos</button>
+                    </form>
                     <form id="delete" th:action="@{/turmas/deletar}" th:object="${dto}" method="post">
                         <input type="number" th:value="${t.id}" id="id" name="id" hidden>
                         <button type="submit">Cancelar turma</button>

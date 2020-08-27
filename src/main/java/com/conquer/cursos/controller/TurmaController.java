@@ -2,6 +2,7 @@ package com.conquer.cursos.controller;
 
 
 import com.conquer.cursos.DTO.DTO;
+import com.conquer.cursos.DTO.MatriculaDTO;
 import com.conquer.cursos.DTO.TurmaDTO;
 import com.conquer.cursos.model.entity.Aluno;
 import com.conquer.cursos.model.entity.Turma;
@@ -31,13 +32,6 @@ public class TurmaController {
         return "turmas";
     }
 
-    @GetMapping("/novaTurma")
-    public String novaTurma(Model model){
-        model.addAttribute("turma", new TurmaDTO());
-        return "novaTurma";
-    }
-
-
     @PostMapping
     public String insertTurma(@Valid @ModelAttribute TurmaDTO dto){
         Turma turma = service.fromDTO(dto);
@@ -51,14 +45,22 @@ public class TurmaController {
         List<Turma> turmas = service.getAllDisponivel(aluno);
         model.addAttribute("turmas", turmas);
         model.addAttribute("aluno", aluno);
+        model.addAttribute("matriculaDTO", new MatriculaDTO());
         return "matricula";
     }
 
-//    @PostMapping("/matricular")
-//    public String matricularAluno(@ModelAttribute Aluno aluno, @ModelAttribute Turma turma){
-//        service.matricularAluno(turma.getId(),aluno);
-//        return "home";
-//    }
+    @PostMapping("/matricula")
+    public String matricularAluno(@ModelAttribute MatriculaDTO dto){
+        Aluno aluno = alunoService.find(dto.getAlunoId());
+        service.matricularAluno(dto.getTurmaId(),aluno);
+        return "redirect:/alunos";
+    }
+
+    @GetMapping("/novaTurma")
+    public String novaTurma(Model model){
+        model.addAttribute("turma", new TurmaDTO());
+        return "novaTurma";
+    }
 
     /* METODOS DA API
     @PostMapping

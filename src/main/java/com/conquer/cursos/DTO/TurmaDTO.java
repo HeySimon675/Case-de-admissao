@@ -3,6 +3,8 @@ package com.conquer.cursos.DTO;
 import com.conquer.cursos.model.entity.Turma;
 import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotEmpty;
 
 public class TurmaDTO extends DTO {
@@ -14,7 +16,8 @@ public class TurmaDTO extends DTO {
     @Length(max = 120, message = "O tamanho deve ser entre 5 e 120 caracteres")
     private String descricao;
 
-    @NotEmpty(message = "Preço obrigatorio")
+    @DecimalMin(value = "0.0", inclusive = false)
+    @Digits(integer = 6, fraction = 2)
     private Double preco;
 
     public TurmaDTO() {

@@ -29,7 +29,7 @@
                     <p>Informações:<br><span th:text="${t.descricao}"></span></p>
                 </div>
                 <footer>
-                    <p>Preço<strong th:text="reais"></strong></p>
+                    <p>Preço<strong th:text="${t.preco} + ' reais'"></strong></p>
                     <form id="alunos" th:action="@{/turmas/matriculados}" th:object="${dto}">
                         <input type="text" th:value="${t.id}" id="id" name="id" hidden>
                         <button type="submit">Ver alunos</button>

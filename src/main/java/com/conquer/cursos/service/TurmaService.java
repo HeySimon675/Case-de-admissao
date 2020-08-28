@@ -33,13 +33,14 @@ public class TurmaService {
     }
 
     public Turma fromDTO(TurmaDTO dto) {
-        return new Turma(dto.getNome(), dto.getDescricao());
+        return new Turma(dto.getNome(), dto.getPreco(), dto.getDescricao());
     }
 
 
     public Turma update(Turma obj){
         Turma aux = find(obj.getId());
         aux.setNome(obj.getNome());
+        aux.setPreco(obj.getPreco());
         aux.setDescricao(obj.getDescricao());
         return repository.save(aux);
     }

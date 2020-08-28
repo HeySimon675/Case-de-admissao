@@ -14,13 +14,27 @@ public class TurmaDTO extends DTO {
     @Length(max = 120, message = "O tamanho deve ser entre 5 e 120 caracteres")
     private String descricao;
 
+    @NotEmpty(message = "Preço obrigatorio")
+    private Double preco;
+
     public TurmaDTO() {
+        setDescricao("");
+        setPreco(0D);
     }
 
     public TurmaDTO(Turma obj) {
         id = obj.getId();
         nome = obj.getNome();
+        preco = obj.getPreco();
         descricao = obj.getDescricao();
+    }
+
+    public Double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(Double preco) {
+        this.preco = preco;
     }
 
     public String getDescricao() {

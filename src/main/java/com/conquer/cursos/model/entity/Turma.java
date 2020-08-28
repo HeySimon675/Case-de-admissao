@@ -20,7 +20,7 @@ public class Turma implements Serializable {
     private Integer id;
 
     private String nome;
-
+    private Double preco;
     private String descricao;
 
     @JsonManagedReference
@@ -33,9 +33,18 @@ public class Turma implements Serializable {
     public Turma() {
     }
 
-    public Turma(String nome, String descricao) {
+    public Turma(String nome, Double preco, String descricao) {
         this.nome = nome;
+        this.preco = preco;
         this.descricao = descricao;
+    }
+
+    public Double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(Double preco) {
+        this.preco = preco;
     }
 
     public String getDescricao() {

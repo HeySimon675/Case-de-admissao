@@ -73,8 +73,4 @@ public class TurmaService {
         List<Turma> disponiveis = getAll().stream().filter(turma -> !turma.isCheia()).filter(turma -> !turma.findAluno(aluno)).collect(Collectors.toList());
         return disponiveis;
     }
-
-    public boolean isMatriculado(Integer alunoId){
-       return false;
-    }
 }
